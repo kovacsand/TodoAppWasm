@@ -36,6 +36,11 @@ public class UserFileDao : IUserDao
         return Task.FromResult(existing);
     }
 
+    public Task<User?> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchUserParameters)
     {
         IEnumerable<User> users = context.Users.AsEnumerable();
