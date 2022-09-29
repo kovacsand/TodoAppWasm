@@ -17,5 +17,33 @@
       "UserName": "Ouafa"
     }
   ],
-  "Todos": []
+  "Todos": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Andras"
+      },
+      "Title": "Go to bed",
+      "IsCompleted": false
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 2,
+        "UserName": "Bety"
+      },
+      "Title": "Make breakfast",
+      "IsCompleted": false
+    },
+    {
+      "Id": 3,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Andras"
+      },
+      "Title": "Eat breakfast",
+      "IsCompleted": false
+    }
+  ]
 }

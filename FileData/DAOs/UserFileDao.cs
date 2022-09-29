@@ -20,7 +20,7 @@ public class UserFileDao : IUserDao
         {
             userId = context.Users.Max(u => u.Id) + 1;
         }
-        
+
         user.Id = userId;
         context.Users.Add(user);
         context.SaveChanges();
@@ -30,15 +30,16 @@ public class UserFileDao : IUserDao
 
     public Task<User?> GetByUsernameAsync(string userName)
     {
-        User? existing = context.Users.FirstOrDefault(u => 
+        User? existing = context.Users.FirstOrDefault(u =>
             u.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase)
-            );
+        );
         return Task.FromResult(existing);
     }
 
     public Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        User? existing = context.Users.FirstOrDefault(u => u.Id == id);
+        return Task.FromResult(existing);
     }
 
     public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchUserParameters)
