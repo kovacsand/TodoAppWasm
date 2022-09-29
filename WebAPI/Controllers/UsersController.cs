@@ -7,11 +7,11 @@ namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserLogic userLogic;
 
-    public UserController(IUserLogic userLogic)
+    public UsersController(IUserLogic userLogic)
     {
         this.userLogic = userLogic;
     }
@@ -23,6 +23,22 @@ public class UserController : ControllerBase
         {
             User user = await userLogic.CreateAsync(dto);
             return Created($"/users/{user.Id}", user);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<User>>> GetAsync([FromQuery] string? userName)
+    {
+        try
+        {
+            SearchUserParametersDto parameters = new(userName);
+            IEnumerable<User> users = await userLogic.GetAsync(parameters);
+            return Ok(users);
         }
         catch (Exception e)
         {
