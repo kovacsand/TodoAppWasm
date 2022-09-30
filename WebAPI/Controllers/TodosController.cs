@@ -32,4 +32,20 @@ public class TodosController : ControllerBase
         }
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? userName, int? userId, bool? completedStatus, string? titleContains)
+    {
+        try
+        {
+            SearchTodoParametersDto parameters = new(userName, userId, completedStatus, titleContains);
+            IEnumerable<Todo> todos = await todoLogic.GetAsync(parameters);
+            return Ok(todos);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+        
+    }
 }
