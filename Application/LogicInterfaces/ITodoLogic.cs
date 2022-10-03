@@ -10,4 +10,6 @@ public interface ITodoLogic
     Task<IEnumerable<Todo>> GetAsync(SearchTodoParametersDto searchTodoParameters);
 
     Task UpdateAsync(TodoUpdateDto todo);
+
+    Task DeleteAsync(int id);
 }

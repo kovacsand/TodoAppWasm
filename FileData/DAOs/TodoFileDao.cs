@@ -61,4 +61,16 @@ public class TodoFileDao : ITodoDao
         
         return Task.CompletedTask; 
     }
+
+    public Task DeleteAsync(int id)
+    {
+        Todo? existing = context.Todos.FirstOrDefault(foundTodo => foundTodo.Id == id);
+        if (existing == null)
+            throw new Exception($"Todo with id {id} not found!");
+        
+        context.Todos.Remove(existing);
+        context.SaveChanges();
+        
+        return Task.CompletedTask;
+    }
 }
