@@ -33,7 +33,8 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? userName, int? userId, bool? completedStatus, string? titleContains)
+    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? userName, int? userId,
+        bool? completedStatus, string? titleContains)
     {
         try
         {
@@ -46,7 +47,22 @@ public class TodosController : ControllerBase
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
         }
-        
+
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Todo>> GetById(int id)
+    {
+        try
+        {
+            Todo todo = await todoLogic.GetById(id);
+            return Ok(todo);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
     }
 
     [HttpPatch]

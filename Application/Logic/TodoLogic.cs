@@ -33,6 +33,11 @@ public class TodoLogic : ITodoLogic
         return todoDao.GetAsync(searchTodoParameters);
     }
 
+    public Task<Todo> GetById(int id)
+    {
+        return todoDao.GetByIdAsync(id);
+    }
+
     public async Task UpdateAsync(TodoUpdateDto dto)
     {
         Todo? existing = await todoDao.GetByIdAsync(dto.Id);
