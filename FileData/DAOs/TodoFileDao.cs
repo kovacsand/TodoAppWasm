@@ -41,5 +41,24 @@ public class TodoFileDao : ITodoDao
             todos = todos.Where(todo => todo.Title.Contains(searchTodoParameters.TitleContains, StringComparison.OrdinalIgnoreCase));
         
         return Task.FromResult(todos);
-    }   
+    }
+
+    public Task<Todo?> GetByIdAsync(int id)
+    {
+        Todo? existing = context.Todos.FirstOrDefault(todo => todo.Id == id);
+        return Task.FromResult(existing);
+    }
+
+    public Task UpdateAsync(Todo todo)
+    {
+        Todo? existing = context.Todos.FirstOrDefault(foundTodo => foundTodo.Id == todo.Id);
+        if (existing == null)
+            throw new Exception($"Todo with id {todo.Id} not found!");
+        
+        context.Todos.Remove(existing);
+        context.Todos.Add(todo);
+        context.SaveChanges();
+        
+        return Task.CompletedTask; 
+    }
 }

@@ -15,16 +15,38 @@
     {
       "Id": 4,
       "UserName": "Ouafa"
+    },
+    {
+      "Id": 5,
+      "UserName": "Kristians"
     }
   ],
   "Todos": [
     {
-      "Id": 1,
+      "Id": 3,
       "Owner": {
         "Id": 1,
         "UserName": "Andras"
       },
-      "Title": "Go to bed",
+      "Title": "Eat breakfast",
+      "IsCompleted": false
+    },
+    {
+      "Id": 5,
+      "Owner": {
+        "Id": 5,
+        "UserName": "Kristians"
+      },
+      "Title": "Do something",
+      "IsCompleted": false
+    },
+    {
+      "Id": 4,
+      "Owner": {
+        "Id": 5,
+        "UserName": "Kristians"
+      },
+      "Title": "Do something",
       "IsCompleted": false
     },
     {
@@ -37,13 +59,13 @@
       "IsCompleted": false
     },
     {
-      "Id": 3,
+      "Id": 1,
       "Owner": {
         "Id": 1,
         "UserName": "Andras"
       },
-      "Title": "Eat breakfast",
-      "IsCompleted": false
+      "Title": "string",
+      "IsCompleted": true
     }
   ]
 }
