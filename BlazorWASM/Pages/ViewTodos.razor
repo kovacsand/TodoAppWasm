@@ -16,7 +16,7 @@
 
 @if (todos == null)
 {
-    <p>Loading..</p>
+    //Not loaded yet
 }
 else if (!todos.Any())
 {
@@ -34,7 +34,7 @@ else
             </tr>
         </thread>
         <tbody>
-        @foreach (var todo in todos)
+        @foreach (Todo todo in todos)
         {
             <tr>
                 <td>@todo.Id</td>
