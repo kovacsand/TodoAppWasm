@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
+using Domain.DTOs;
 using Domain.Models;
 using HttpClients.ClientInterfaces;
 
@@ -11,6 +13,14 @@ public class TodoHttpClient : ITodoService
     public TodoHttpClient(HttpClient client)
     {
         this.client = client;
+    }
+
+    public async Task CreateAsync(TodoCreationDto dto)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/todos", dto);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+            throw new Exception(result);
     }
 
     public async Task<IEnumerable<Todo>> GetAsync(string? userName, int? userId, bool? completedStatus, string? titleContains)
