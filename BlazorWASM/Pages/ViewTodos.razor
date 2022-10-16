@@ -1,0 +1,68 @@
+﻿@page "/ViewTodos"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@inject ITodoService todoService;
+
+<h3>ViewTodos</h3>
+
+<div>
+    <button @onclick="LoadTodos">Load</button>
+</div>
+
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+@if (todos == null)
+{
+    <p>Loading..</p>
+}
+else if (!todos.Any())
+{
+    <p>No todos to display</p>
+}
+else
+{
+    <table>
+        <thread>
+            <tr>
+                <th>Todo ID</th>
+                <th>Owner</th>
+                <th>Title</th>
+                <th>Completed</th>
+            </tr>
+        </thread>
+        <tbody>
+        @foreach (var todo in todos)
+        {
+            <tr>
+                <td>@todo.Id</td>
+                <td>@todo.Owner.UserName</td>
+                <td>@todo.Title</td>
+                <td>@todo.IsCompleted</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Todo>? todos;
+    private string msg = "";
+
+    private async Task LoadTodos()
+    {
+        msg = "";
+        try
+        {
+            todos = await todoService.GetAsync(null, null, null, null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+}
