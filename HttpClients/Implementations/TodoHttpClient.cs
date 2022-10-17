@@ -25,7 +25,8 @@ public class TodoHttpClient : ITodoService
 
     public async Task<IEnumerable<Todo>> GetAsync(string? userName, int? userId, bool? completedStatus, string? titleContains)
     {
-        HttpResponseMessage response = await client.GetAsync("/todos");
+        string query = ConstructQuery(userName, userId, completedStatus, titleContains);
+        HttpResponseMessage response = await client.GetAsync("/todos" + query);
         string content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
             throw new Exception(content);
@@ -33,5 +34,20 @@ public class TodoHttpClient : ITodoService
         IEnumerable<Todo> todos = JsonSerializer.Deserialize<IEnumerable<Todo>>(content,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         return todos;
+    }
+
+    private static string ConstructQuery(string? userName, int? userId, bool? completedStatus, string? titleContains)
+    {
+        string query = "";
+        if (!string.IsNullOrEmpty(userName))
+            query += $"?username={userName}";
+        if (userId != null)
+            query += (string.IsNullOrEmpty(query) ? "?" : "&") + $"userid={userId}";
+        if (completedStatus != null)
+            query += (string.IsNullOrEmpty(query) ? "?" : "&") + $"completedstatus={completedStatus}";
+        if (!string.IsNullOrEmpty(titleContains))
+            query += (string.IsNullOrEmpty(query) ? "?" : "&") + $"titlecontains={titleContains}";
+
+        return query;
     }
 }
