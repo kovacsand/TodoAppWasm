@@ -4,7 +4,34 @@
 @inject ITodoService todoService;
 
 <h3>ViewTodos</h3>
-
+<div class="filter-bar">
+    <div class="filters-container">
+        <img src="icons/@(showFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => showFilters = !showFilters)" alt="Funnel"/>
+        @if (showFilters)
+        {
+            <div class="filter">
+                <label>Username:</label>
+                <input type="text" @bind="userNameFilter"/>
+            </div>
+            <div class="filter">
+                <label>User id:</label>
+                <input type="number" @bind="userIdFilter"/>
+            </div>
+            <div class="filter">
+                <label>Is completed?</label>
+                <select @bind="completedStatusFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="filter">
+                <label>Title contains:</label>
+                <input type="text" @bind="titleContainsFilter"/>
+            </div>
+        }
+    </div>
+</div>
 <div>
     <button @onclick="LoadTodos">Load</button>
 </div>
@@ -61,7 +88,7 @@ else
         try
         {
             bool? completedFilterValue = null;
-            if (!string.IsNullOrEmpty(completedStatusFilter) && !completedStatusFilter.Equals("all"))
+            if (!string.IsNullOrEmpty(completedStatusFilter) && !completedStatusFilter.Equals("All"))
                 completedFilterValue = bool.Parse(completedStatusFilter);
             todos = await todoService.GetAsync(userNameFilter, userIdFilter, completedFilterValue, titleContainsFilter);
         }
