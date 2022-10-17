@@ -35,15 +35,6 @@
   ],
   "Todos": [
     {
-      "Id": 6,
-      "Owner": {
-        "Id": 1,
-        "UserName": "Andras"
-      },
-      "Title": "Finish assignment",
-      "IsCompleted": true
-    },
-    {
       "Id": 9,
       "Owner": {
         "Id": 2,
@@ -59,15 +50,6 @@
         "UserName": "Andras"
       },
       "Title": "string",
-      "IsCompleted": true
-    },
-    {
-      "Id": 8,
-      "Owner": {
-        "Id": 8,
-        "UserName": "Doe"
-      },
-      "Title": "Do something",
       "IsCompleted": true
     },
     {
@@ -122,6 +104,24 @@
         "UserName": "Andras"
       },
       "Title": "Make breakfasts",
+      "IsCompleted": true
+    },
+    {
+      "Id": 6,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Andras"
+      },
+      "Title": "Finish assignments",
+      "IsCompleted": true
+    },
+    {
+      "Id": 8,
+      "Owner": {
+        "Id": 5,
+        "UserName": "Kristians"
+      },
+      "Title": "Do something",
       "IsCompleted": true
     }
   ]

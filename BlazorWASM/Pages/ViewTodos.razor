@@ -3,7 +3,8 @@
 @using Domain.Models
 @using UIComponents
 @using Domain.DTOs
-@inject ITodoService todoService;
+@inject ITodoService todoService
+@inject NavigationManager navMgr;
 
 <h3>ViewTodos</h3>
 <div class="filter-bar">
@@ -59,6 +60,7 @@ else
             <th>Owner</th>
             <th>Title</th>
             <th>Completed</th>
+            <th>Edit</th>
         </tr>
         <tbody>
         @foreach (Todo todo in todos)
@@ -69,6 +71,9 @@ else
                 <td>@todo.Title</td>
                 <td>
                     <FancyCheckBox Completed="@todo.IsCompleted" OnChange="@((status) => CompleteTodo(todo, status))"/>
+                </td>
+                <td>
+                    <img src="icons/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditTodo/{todo.Id}"))">
                 </td>
             </tr>
         }
