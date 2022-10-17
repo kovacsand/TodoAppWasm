@@ -1,18 +1,33 @@
 ﻿@namespace UIComponents
 
 <label class="checkbox-container">
-    <input 
-        type="checkbox" 
-        class="checkbox-input" 
-        checked="@Completed" 
-        @onchange="@((arg) => OnChange.InvokeAsync((bool)arg.Value!))"
-    />
+    <input
+        type="checkbox"
+        class="checkbox-input"
+        checked="@Completed"
+        @onchange="@((arg) => CheckValue(arg))"/>
     <span class="checkbox-span"></span>
 </label>
 
 @code {
+
     [Parameter]
     public bool Completed { get; set; }
+
     [Parameter]
     public EventCallback<bool> OnChange { get; set; }
+
+    private void CheckValue(ChangeEventArgs changeEventArgs)
+    {
+        try
+        {
+            OnChange.InvokeAsync((bool)changeEventArgs.Value!);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Completed = true;
+            throw new Exception("Cannot un-complete a completed Todo");
+        }
+    }
 }
