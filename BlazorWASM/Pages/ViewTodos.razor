@@ -48,13 +48,22 @@ else
 @code {
     private IEnumerable<Todo>? todos;
     private string msg = "";
+    private bool showFilters = false;
+
+    private string? userNameFilter;
+    private int? userIdFilter;
+    private string? completedStatusFilter;
+    private string? titleContainsFilter;
 
     private async Task LoadTodos()
     {
         msg = "";
         try
         {
-            todos = await todoService.GetAsync(null, null, null, null);
+            bool? completedFilterValue = null;
+            if (!string.IsNullOrEmpty(completedStatusFilter) && !completedStatusFilter.Equals("all"))
+                completedFilterValue = bool.Parse(completedStatusFilter);
+            todos = await todoService.GetAsync(userNameFilter, userIdFilter, completedFilterValue, titleContainsFilter);
         }
         catch (Exception e)
         {
