@@ -1,0 +1,18 @@
+﻿@namespace UIComponents
+
+<label class="checkbox-container">
+    <input 
+        type="checkbox" 
+        class="checkbox-input" 
+        checked="@Completed" 
+        @onchange="@((arg) => OnChange.InvokeAsync((bool)arg.Value!))"
+    />
+    <span class="checkbox-span"></span>
+</label>
+
+@code {
+    [Parameter]
+    public bool Completed { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnChange { get; set; }
+}
