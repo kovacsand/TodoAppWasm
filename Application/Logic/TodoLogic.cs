@@ -33,9 +33,15 @@ public class TodoLogic : ITodoLogic
         return todoDao.GetAsync(searchTodoParameters);
     }
 
-    public Task<Todo> GetById(int id)
+    public async Task<TodoDto> GetByIdAsync(int id)
     {
-        return todoDao.GetByIdAsync(id);
+        Todo? todo = await todoDao.GetByIdAsync(id);
+        if (todo == null)
+        {
+            throw new Exception($"Todo with id {id} not found");
+        }
+
+        return new TodoDto(todo.Id, todo.Owner.UserName, todo.Title, todo.IsCompleted);
     }
 
     public async Task UpdateAsync(TodoUpdateDto dto)

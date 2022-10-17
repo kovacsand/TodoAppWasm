@@ -37,6 +37,18 @@ public class TodoHttpClient : ITodoService
         return todos;
     }
 
+    public async Task<TodoDto> GetByIdAsync(int id)
+    {
+        HttpResponseMessage respone = await client.GetAsync($"/todos/{id}");
+        string content = await respone.Content.ReadAsStringAsync();
+        if (!respone.IsSuccessStatusCode)
+            throw new Exception(content);
+
+        TodoDto todo = JsonSerializer.Deserialize<TodoDto>(content,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        return todo;
+    }
+
     public async Task UpdateAsync(TodoUpdateDto dto)
     {
         string dtoAsJson = JsonSerializer.Serialize(dto);

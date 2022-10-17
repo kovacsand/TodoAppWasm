@@ -9,7 +9,7 @@ public interface ITodoLogic
 
     Task<IEnumerable<Todo>> GetAsync(SearchTodoParametersDto searchTodoParameters);
 
-    Task<Todo> GetById(int id);
+    Task<TodoDto> GetByIdAsync(int id);
     
     Task UpdateAsync(TodoUpdateDto todo);
 

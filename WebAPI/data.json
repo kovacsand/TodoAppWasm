@@ -44,15 +44,6 @@
       "IsCompleted": true
     },
     {
-      "Id": 2,
-      "Owner": {
-        "Id": 2,
-        "UserName": "Bety"
-      },
-      "Title": "Make breakfast",
-      "IsCompleted": true
-    },
-    {
       "Id": 9,
       "Owner": {
         "Id": 2,
@@ -122,6 +113,15 @@
         "UserName": "Bety"
       },
       "Title": "asdf",
+      "IsCompleted": true
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Andras"
+      },
+      "Title": "Make breakfasts",
       "IsCompleted": true
     }
   ]
