@@ -44,15 +44,6 @@
       "IsCompleted": false
     },
     {
-      "Id": 5,
-      "Owner": {
-        "Id": 5,
-        "UserName": "Kristians"
-      },
-      "Title": "Do something",
-      "IsCompleted": false
-    },
-    {
       "Id": 2,
       "Owner": {
         "Id": 2,
@@ -96,6 +87,15 @@
       },
       "Title": "Do something",
       "IsCompleted": false
+    },
+    {
+      "Id": 5,
+      "Owner": {
+        "Id": 5,
+        "UserName": "Kristians"
+      },
+      "Title": "Do something",
+      "IsCompleted": true
     }
   ]
 }
