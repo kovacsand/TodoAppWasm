@@ -9,4 +9,5 @@ public interface ITodoService
     Task<IEnumerable<Todo>> GetAsync(string? userName, int? userId, bool? completedStatus, string? titleContains);
     Task<TodoDto> GetByIdAsync(int id);
     Task UpdateAsync(TodoUpdateDto dto);
+    Task DeleteAsync(int id);
 }

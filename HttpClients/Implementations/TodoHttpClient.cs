@@ -62,6 +62,13 @@ public class TodoHttpClient : ITodoService
         }
     }
 
+    public async Task DeleteAsync(int id)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"Todos/{id}");
+        if (!response.IsSuccessStatusCode)
+            throw new Exception(await response.Content.ReadAsStringAsync());
+    }
+
     private static string ConstructQuery(string? userName, int? userId, bool? completedStatus, string? titleContains)
     {
         string query = "";
