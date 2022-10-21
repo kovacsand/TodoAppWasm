@@ -114,6 +114,11 @@ else
 
     private async void CompleteTodo(Todo todo, bool status)
     {
+        if (todo.IsCompleted && !status)
+        {
+            //TODO change the FancyCheckbox back to empty here
+            return;
+        }
         TodoUpdateDto dto = new(todo.Id)
         {
             IsCompleted = status

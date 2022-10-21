@@ -98,15 +98,6 @@
       "IsCompleted": true
     },
     {
-      "Id": 6,
-      "Owner": {
-        "Id": 1,
-        "UserName": "Andras"
-      },
-      "Title": "Finish assignments",
-      "IsCompleted": true
-    },
-    {
       "Id": 8,
       "Owner": {
         "Id": 5,
@@ -116,13 +107,22 @@
       "IsCompleted": true
     },
     {
+      "Id": 6,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Andras"
+      },
+      "Title": "Finish assignments",
+      "IsCompleted": true
+    },
+    {
       "Id": 12,
       "Owner": {
         "Id": 1,
         "UserName": "Andras"
       },
       "Title": "do it",
-      "IsCompleted": false
+      "IsCompleted": true
     }
   ]
 }
