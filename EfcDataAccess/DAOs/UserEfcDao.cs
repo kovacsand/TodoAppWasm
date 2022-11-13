@@ -28,9 +28,10 @@ public class UserEfcDao : IUserDao
         return Task.FromResult(existing);
     }
 
-    public Task<User?> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        User? existing = await context.Users.FindAsync(id);
+        return existing;
     }
 
     public async Task<IEnumerable<User>> GetAsync(SearchUserParametersDto dto)
