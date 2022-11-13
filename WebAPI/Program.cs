@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
+using EfcDataAccess;
 using EfcDataAccess.DAOs;
 using FileData;
 using FileData.DAOs;
@@ -14,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<FileContext>();
+builder.Services.AddScoped<TodoContext>();
 builder.Services.AddScoped<IUserDao, UserEfcDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<ITodoDao, TodoEfcDao>();

@@ -1,19 +1,30 @@
 ﻿using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EfcDataAccess.DAOs;
 
 public class UserEfcDao : IUserDao
 {
-    public Task<User> CreateAsync(User user)
+    private readonly TodoContext context;
+
+    public UserEfcDao(TodoContext context)
     {
-        throw new NotImplementedException();
+        this.context = context;
+    }
+    
+    public async Task<User> CreateAsync(User user)
+    {
+        EntityEntry<User> newUser = await context.Users.AddAsync(user);
+        await context.SaveChangesAsync();
+        return newUser.Entity;
     }
 
     public Task<User?> GetByUsernameAsync(string userName)
     {
-        throw new NotImplementedException();
+        User? existing = context.Users.FirstOrDefault(u => u.UserName.ToLower().Equals(userName.ToLower()));
+        return Task.FromResult(existing);
     }
 
     public Task<User?> GetByIdAsync(int id)

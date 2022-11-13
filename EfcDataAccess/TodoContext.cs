@@ -5,12 +5,12 @@ namespace EfcDataAccess;
 
 public class TodoContext : DbContext
 {
-    private DbSet<User> Users { get; set; }
-    private DbSet<Todo> Todos { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Todo> Todos { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source = Todo.db");
+        optionsBuilder.UseSqlite("Data Source = ../EfcDataAccess/Todo.db");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
