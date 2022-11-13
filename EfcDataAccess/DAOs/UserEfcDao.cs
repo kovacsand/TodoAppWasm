@@ -1,6 +1,7 @@
 ﻿using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EfcDataAccess.DAOs;
@@ -32,8 +33,13 @@ public class UserEfcDao : IUserDao
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto dto)
+    public async Task<IEnumerable<User>> GetAsync(SearchUserParametersDto dto)
     {
-        throw new NotImplementedException();
+        IQueryable<User> usersQuery = context.Users.AsQueryable();
+        if (dto.UserNameContains != null)
+            usersQuery = usersQuery.Where(u => u.UserName.ToLower().Contains(dto.UserNameContains.ToLower()));
+
+        IEnumerable<User> result = await usersQuery.ToListAsync();
+        return result;
     }
 }
