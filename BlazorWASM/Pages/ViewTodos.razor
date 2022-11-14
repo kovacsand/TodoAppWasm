@@ -68,8 +68,14 @@ else
         {
             <tr>
                 <td>@todo.Id</td>
-                <td>@todo.Owner.UserName</td>
-                <td>@todo.Title</td>
+                <td>
+                    @* @todo.Owner.UserName *@
+                    so it's the username
+                </td>
+                <td>
+                    @* @todo.Title *@
+                    and the title
+                </td>
                 <td>
                     <FancyCheckBox Completed="@todo.IsCompleted" OnChange="@((status) => CompleteTodo(todo, status))"/>
                 </td>
@@ -86,7 +92,7 @@ else
 }
 
 @code {
-    private IEnumerable<Todo>? todos;
+    private IEnumerable<Todo>? todos =  new List<Todo>();
     private string msg = "";
     private bool showFilters = false;
 

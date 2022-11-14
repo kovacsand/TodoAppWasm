@@ -27,7 +27,6 @@ public class TodoEfcDao : ITodoDao
         IQueryable<Todo> query = context.Todos.Include(todo => todo.Owner).AsQueryable();
     
         if (!string.IsNullOrEmpty(searchTodoParameters.UserName))
-            // we know username is unique, so just fetch the first
             query = query.Where(todo => todo.Owner.UserName.ToLower().Equals(searchTodoParameters.UserName.ToLower()));
 
         if (searchTodoParameters.UserId != null)
@@ -43,18 +42,26 @@ public class TodoEfcDao : ITodoDao
         return result;
     }
 
-    public Task<Todo> GetByIdAsync(int id)
+    public async Task<Todo> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        Todo? existing = await context.Todos.FindAsync(id);
+        return existing;
     }
 
-    public Task UpdateAsync(Todo todo)
+    public async Task UpdateAsync(Todo todo)
     {
-        throw new NotImplementedException();
+        context.ChangeTracker.Clear();
+        context.Todos.Update(todo);
+        await context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        Todo? existing = await GetByIdAsync(id);
+        if (existing == null)
+            throw new Exception($"Todo with id {id} not found!");
+        
+        context.Todos.Remove(existing);
+        await context.SaveChangesAsync();
     }
 }
