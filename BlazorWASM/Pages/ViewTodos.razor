@@ -69,12 +69,10 @@ else
             <tr>
                 <td>@todo.Id</td>
                 <td>
-                    @* @todo.Owner.UserName *@
-                    so it's the username
+                    @todo.Owner.UserName
                 </td>
                 <td>
-                    @* @todo.Title *@
-                    and the title
+                    @todo.Title
                 </td>
                 <td>
                     <FancyCheckBox Completed="@todo.IsCompleted" OnChange="@((status) => CompleteTodo(todo, status))"/>
